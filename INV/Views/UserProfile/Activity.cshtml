@@ -1,0 +1,49 @@
+﻿@model IEnumerable<INV.Models.Order>
+
+<h2 style="color: lightskyblue;">Orders</h2>
+<table class="table table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.orderNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Customer.Name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateTime)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AspNetUser.Address)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderNo)
+
+            </td>
+            <td>
+            @Html.DisplayFor(modelItem => item.Customer.Name)
+
+            <td>
+                @Html.DisplayFor(modelItem => item.DateTime)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AspNetUser.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+
+            <td>
+
+                @Html.ActionLink("Details", "Details", new {id = item.ord_id})
+            </td>
+        </tr>
+    }
+</table>

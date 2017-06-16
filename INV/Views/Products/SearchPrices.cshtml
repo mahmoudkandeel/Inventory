@@ -1,0 +1,29 @@
+﻿@model INV.Models.Product
+
+@{
+    ViewBag.Title = "SearchPrices";
+}
+
+<h2>SearchPrices</h2>
+
+
+<input type="number" name="from" id="from"/>
+<input type="number" name="to" id="to"/>
+<input type="button" value="search" onclick="seachfunc()"/>
+
+<script>
+    function seachfunc() {
+        $.ajax({
+            type: "GET",
+            url: '/Products/SearchPriceRange',
+            data:
+            {
+                'from': $("#from").val(),
+                'to': $("#to").val()
+            },
+            success: function(data) {
+                @Html.Partial("SearchPriceRange");
+            }
+        });
+    }
+</script>

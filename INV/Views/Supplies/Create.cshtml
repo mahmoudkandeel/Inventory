@@ -1,0 +1,148 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">Create supply</h3>
+        <div class="box-body">
+            @using (Html.BeginForm())
+            {
+                <div class="container">
+                    <div class="master">
+                        <h3 class="text-green Bold">Supply</h3>
+                        <hr/>
+                        <div class="col-xs-4 form-group">
+                            <label>Supply #</label>
+                            <input type="text" id="supplyNo" class="form-control" value="@ViewBag.supplyNo" disabled="disabled"/>
+                            <span class="error">Supply no required</span>
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Supplier Name</label>
+                            @Html.DropDownList("SupplierNo", ViewBag.sup_id as SelectList, new {@class = "form-control", @id = "SupplierNo"})
+                            <span class="error">Supplier no required</span>
+                        </div>
+                        <div class="col-xs-4 form-group">
+                            <label>Supply Date</label>
+                            <div class="input-group date">
+                                <input type="text" id="supplyDate" class="form-control pull-right"/>
+                                <div class="input-group-addon">
+                                    <i class="fa fa-calendar"></i>
+                                </div>
+                            </div>
+
+                            <span class="error">Valid Supply date required (ex: MM-dd-yyyy)</span>
+                        </div>
+                        <div class="col-xs-12 form-group">
+                            <label>Description</label>
+                            <textarea id="description" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="details">
+                        <h3 class="text-green Bold">Supply Items</h3>
+                        <div class="form-group">
+                            <table class="table table-responsive">
+                                <tr>
+                                    <td>Category</td>
+                                    <td>Brand</td>
+                                    <td>Product</td>
+                                    <td>Quantity</td>
+                                    <td>UnitPrice</td>
+                                    <td>Discount</td>
+                                    <td>&nbsp;</td>
+                                </tr>
+                                <tr class="mycontainer" id="mainrow">
+                                    <td>
+                                        <div class="form-group">
+                                            <select id="productCategory" class="pc form-control" onchange="LoadBrand(this)">
+                                                <option>Select</option>
+                                            </select>
+                                            <span class="error">Select Category</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select id="productBrand" class="brand form-control" onchange="LoadProduct(this)">
+                                                <option>Select</option>
+                                            </select>
+                                            <span class="error">Select Brand</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <select id="product" class="product form-control" onchange="LoadPrice(this)">
+                                                <option>Select</option>
+                                            </select>
+                                            <span class="error">Select product</span>
+                                        </div>
+
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" id="quantity" class="quantity form-control" min="1" value="1"/>
+                                            <span class="error">Valid quantity required</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" id="UnitPrice" class="UnitPrice form-control" min="1" disabled="disabled"/>
+                                            <span class="error">Valid UnitPrice required</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div class="form-group">
+                                            <input type="number" id="Discount" class="Discount form-control" min="0" value="0"/>
+                                            <span class="error">Valid Discount required</span>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <input type="button" id="add" value="Add" style="width: 80px" class="btn btn-success"/>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                        <div class="form-group">
+                            <div id="supplyItems">
+                                <table class="table table-responsive" id="supplydetailsItems"></table>
+                                <span id="supplyItemError" style="color: red"></span>
+                            </div>
+                            <input id="submit" type="button" value="Save supply" class="btn btn-block btn-success"/>
+                        </div>
+                    </div>
+                </div>
+            }
+            <a href="@Url.Action("Index")">Back to List</a>
+        </div>
+    </div>
+</div>
+@section Styles
+{
+    <link href="~/Content/plugins/datepicker/datepicker3.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet"/>
+}
+@section Scripts
+{
+    <script src="~/Content/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script src="~/Scripts/Supply.js"></script>
+
+    <script type="text/javascript">
+        $(function() {
+            $('#supplyDate').datepicker({
+                autoclose: true,
+                format: 'mm-dd-yyyy'
+            }).datepicker("setDate", "0");
+        });
+    </script>
+}
+
+
+<style>
+    span.error {
+        display: block;
+        visibility: hidden;
+        color: red;
+        font-size: 90%;
+    }
+
+    tr.error { background-color: rgba(255, 0, 0, 0.35); }
+</style>

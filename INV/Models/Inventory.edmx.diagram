@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d8d321f1789f4062b70597d882c8390c" Name="Diagram1">
+        <EntityTypeShape EntityType="InventoryModel.AspNetUser" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Brand" Width="1.5" PointX="3.75" PointY="11" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Category" Width="1.5" PointX="1.5" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Customer" Width="1.5" PointX="0.75" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.OrderDetail" Width="1.5" PointX="8.25" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Order" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Product" Width="1.5" PointX="6" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.SupplierInvoice" Width="1.5" PointX="10.5" PointY="8.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="InventoryModel.Supplier" Width="1.5" PointX="8.25" PointY="10.25" IsExpanded="true" />
+        <AssociationConnector Association="InventoryModel.FK_Orders_AspNetUsers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Brand_Categorie" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Products_Brands" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Orders_Customers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_OrderDetails_Orders" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_OrderDetails_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_Products_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_SuppliersInvoce_Products" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.FK_SupplierInvoce_Suppliers" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.CustomerProducts" ManuallyRouted="false" />
+        <AssociationConnector Association="InventoryModel.SupplierProducts" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="InventoryModel.Supply" Width="1.5" PointX="10.5" PointY="3.75" />
+        <EntityTypeShape EntityType="InventoryModel.SupplyDetail" Width="1.5" PointX="12.75" PointY="6" />
+        <AssociationConnector Association="InventoryModel.FK_Supply_AspNetUsers" />
+        <AssociationConnector Association="InventoryModel.FK_SupplyDetails_Products" />
+        <AssociationConnector Association="InventoryModel.FK_Supply_Suppliers" />
+        <AssociationConnector Association="InventoryModel.FK_SupplyDetails_Supply" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

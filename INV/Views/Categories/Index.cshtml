@@ -1,0 +1,81 @@
+﻿@model IEnumerable<INV.Models.Category>
+
+@{
+    ViewBag.Title = "Categories";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Categories")" class="btn btn-success">
+        <i class="fa fa-file"></i> Create New
+    </a>
+</p>
+
+<table id="myTable" class="table table-bordered table-hover">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>Category Name</th>
+        <th>Category Description</th>
+        <th class="hidden-xs">Notes</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    @{ int i = 0; }
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(++i)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Description)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Notes)</td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", "Categories", new {id = item.cat_id})" class="btn btn-flat bg-green">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Details", "Categories", new {id = item.cat_id})" class="btn btn-flat bg-yellow">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a id="deleteBtn" onclick="deletefunc('@item.cat_id')" class="btn btn-flat bg-red">
+                        <i class="fa fa-remove"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>#</th>
+        <th>Category Name</th>
+        <th>Category Description</th>
+        <th class="hidden-xs">Notes</th>
+        <th>Action</th>
+    </tr>
+    </tfoot>
+</table>
+
+@section styles
+{
+    <link href="~/Content/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet"/>
+}
+
+@section scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/jszip.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Scripts/Categories/Index.js"></script>
+}

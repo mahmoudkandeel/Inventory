@@ -1,0 +1,48 @@
+﻿@model INV.Models.Supplier
+
+@{
+    ViewBag.Title = "Supplier Details";
+}
+
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">Supplier Details</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="form-group">
+            @*<label>Customer Photo</label>*@
+            <div class="text-center">
+                <img src="@Model.Photo" width="300px" height="150px" class="img-circle img-thumbnail " />
+            </div>
+        </div>
+        <div class="form-group">
+            <label>Supplier Name</label>
+            <input type="text" class="form-control" placeholder="@Model.Name" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Address</label>
+            <input type="text" class="form-control" placeholder="@Model.Address" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Phone</label>
+            <input type="text" class="form-control" placeholder="@Model.Phone" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Zipcode</label>
+            <input type="text" class="form-control" placeholder="@Model.Zipcode" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Email</label>
+            <input type="text" class="form-control" placeholder="@Model.Email" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Notes</label>
+            <input type="text" class="form-control" placeholder="@Model.Notes" disabled="">
+        </div>
+        <p>
+            <a href="@Url.Action("Edit", new {id = Model.sup_id})">Edit</a> |
+            <a href="@Url.Action("Index")">Back to List</a>
+        </p>
+    </div>
+</div>

@@ -1,0 +1,114 @@
+﻿@model IEnumerable<INV.Models.Product>
+
+@{
+    ViewBag.Title = "Products";
+}
+
+<p>
+    <a href="@Url.Action("Create", "Products")" class="btn btn-success">
+        <i class="fa fa-file"></i>
+        Create New
+    </a>
+</p>
+<div class="row">
+    <div class="col-xs-2 col-xs-offset-2">
+        <label for="min">Minimum Price</label>
+        <input type="number" class="form-control" id="min" placeholder="Minimum price" min="0">
+    </div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-2">
+        <label for="max">Maximum Price</label>
+        <input type="number" class="form-control" id="max" placeholder="Maximum price" min="0">
+    </div>
+</div>
+
+<table class="table table-bordered table-hover table-responsive" id="myTable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Photo)</th>
+        <th>@Html.DisplayNameFor(model => model.UnitsInStock)</th>
+        <th>@Html.DisplayNameFor(model => model.unitePrice)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.ExpireDate)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.EntryDate)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Notes)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Description)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Brand.Description)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Supplier.Name)</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    @{ int i = 0; }
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(++i)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td class="hidden-xs">
+                <img src="@(item.Photo == "" ? "/Content/Images/Products/Default.jpg" : "/Content/Images/Products/" + item.Photo)" width="50px" height="50px" class="image img-thumbnail"/>
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.UnitsInStock)</td>
+            <td>@Html.DisplayFor(modelItem => item.unitePrice)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.ExpireDate)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.EntryDate)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Notes)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Description)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Brand.Description)</td>
+            <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", "Products", new {id = item.pro_id})" class="btn btn-flat bg-green">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Details", "Products", new {id = item.pro_id})" class="btn btn-flat bg-yellow">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a id="deleteBtn" onclick="deletefunc('@item.pro_id')" class="btn btn-flat bg-red">
+                        <i class="fa fa-remove"></i>
+                    </a>
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>#</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Photo)</th>
+        <th>@Html.DisplayNameFor(model => model.UnitsInStock)</th>
+        <th>@Html.DisplayNameFor(model => model.unitePrice)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.ExpireDate)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.EntryDate)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Notes)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Description)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Brand.Description)</th>
+        <th class="hidden-xs">@Html.DisplayNameFor(model => model.Supplier.Name)</th>
+        <th>Action</th>
+    </tr>
+    </tfoot>
+</table>
+
+@section styles
+{
+    <link href="~/Content/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet"/>
+}
+
+@section scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/jszip.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script src="~/Scripts/Products/Index.js"></script>
+}

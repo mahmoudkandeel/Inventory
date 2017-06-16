@@ -1,0 +1,164 @@
+﻿@model IEnumerable<INV.Models.Employee>
+
+@{
+    ViewBag.Title = "Employees";
+}
+
+<h2>Index</h2>
+
+<p>
+    <a href="@Url.Action("Create", "Employees")" class="btn btn-success">
+        <i class="fa fa-file"></i>
+        Create New
+    </a>
+</p>
+
+
+<table class="table table-bordered table-hover" id="myTable">
+    <thead>
+    <tr>
+        <th>#</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Salary)</th>
+        <th>@Html.DisplayNameFor(model => model.Address)</th>
+        <th>@Html.DisplayNameFor(model => model.Photo)</th>
+        <th>@Html.DisplayNameFor(model => model.Phone)</th>
+        <th>@Html.DisplayNameFor(model => model.Notes)</th>
+        <th>@Html.DisplayNameFor(model => model.HireDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.Privilege)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>Action</th>
+    </tr>
+    </thead>
+    @{ int i = 0; }
+    <tbody>
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@(++i)</td>
+            <td>@Html.DisplayFor(modelItem => item.Name)</td>
+            <td>@Html.DisplayFor(modelItem => item.Salary)</td>
+            <td>@Html.DisplayFor(modelItem => item.Address)</td>
+            <td>
+                <img src="@item.Photo" width="50px" height="50px" class="image  img-thumbnail"/>
+            </td>
+            <td>@Html.DisplayFor(modelItem => item.Phone)</td>
+            <td>@Html.DisplayFor(modelItem => item.Notes)</td>
+            <td>@Html.DisplayFor(modelItem => item.HireDate)</td>
+            <td>@Html.DisplayFor(modelItem => item.Email)</td>
+            <td>@Html.DisplayFor(modelItem => item.Privilege)</td>
+            <td>@Html.DisplayFor(modelItem => item.Title)</td>
+            <td class="text-center">
+                <div class="btn-group">
+                    <a href="@Url.Action("Edit", "Employees", new {id = item.emp_id})" class="btn btn-flat bg-green">
+                        <i class="fa fa-edit"></i>
+                    </a>
+                    <a href="@Url.Action("Details", "Employees", new {id = item.emp_id})" class="btn btn-flat bg-yellow">
+                        <i class="fa fa-eye"></i>
+                    </a>
+                    <a id="deleteBtn" onclick="deletefunc('@item.emp_id')" class="btn btn-flat bg-red">
+                        <i class="fa fa-remove"></i>
+                    </a>
+                    @*<a href="@Url.Action("Delete", "Employees", new {id = item.emp_id})" class="btn btn-flat bg-red">
+                        <i class="fa fa-remove"></i>
+                    </a>*@
+                </div>
+            </td>
+        </tr>
+    }
+    </tbody>
+    <tfoot>
+    <tr>
+        <th>#</th>
+        <th>@Html.DisplayNameFor(model => model.Name)</th>
+        <th>@Html.DisplayNameFor(model => model.Salary)</th>
+        <th>@Html.DisplayNameFor(model => model.Address)</th>
+        <th>@Html.DisplayNameFor(model => model.Photo)</th>
+        <th>@Html.DisplayNameFor(model => model.Phone)</th>
+        <th>@Html.DisplayNameFor(model => model.Notes)</th>
+        <th>@Html.DisplayNameFor(model => model.HireDate)</th>
+        <th>@Html.DisplayNameFor(model => model.Email)</th>
+        <th>@Html.DisplayNameFor(model => model.Privilege)</th>
+        <th>@Html.DisplayNameFor(model => model.Title)</th>
+        <th>Action</th>
+    </tr>
+    </tfoot>
+</table>
+
+@section styles
+{
+    <link href="~/Content/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet"/>
+    @*<link href="~/Content/plugins/datatables/dataTables.bootstrap.css" rel="stylesheet" />*@
+    <link href="~/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet"/>
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet"/>
+
+}
+
+@section scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    @*<script src="~/Content/plugins/datatables/dataTables.bootstrap.js"></script>*@
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/jszip.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script>
+        function deletefunc(id) {
+            swal({
+                    title: "Are you sure?",
+                    text: "Are you sure that you want to delete this Item?",
+                    type: "warning",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonColor: "#ec6c62"
+                },
+                function() {
+                    $.ajax({
+                            url: "/Employees/Delete/" + id,
+                            type: "POST"
+                        })
+                        .done(function(data) {
+                            sweetAlert({
+                                    title: "Deleted!",
+                                    text: "Your file was successfully deleted!",
+                                    type: "success"
+                                },
+                                function() {
+                                    window.location.href = '/Employees';
+                                });
+                        })
+                        .error(function(data) {
+                            swal("Oops", "We couldn't connect to the server!", "error");
+                        });
+                });
+        }
+    </script>
+
+
+    <script>
+        $(document).ready(function() {
+            $('#myTable').DataTable({
+                dom: 'Bfrtlp',
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "aoColumnDefs":
+                [
+                    { "bSortable": false, "aTargets": [-1] } //a negative integer - column index counting from the right
+                ],
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+        });
+    </script>
+}

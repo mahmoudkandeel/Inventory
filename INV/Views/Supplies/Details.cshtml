@@ -1,0 +1,71 @@
+﻿@model IEnumerable<INV.Models.SupplyDetail>
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<table class="table table-bordered table-hover table-responsive" id="myTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Product.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.UnitPrice)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.Discount)</th>
+            <th class="hidden-xs">Employee Name</th>
+            <th class="hidden-xs">Product Image</th>
+        </tr>
+    </thead>
+    @{ int i = 0; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="text-center">
+                <td>@(++i)</td>
+                <td>@Html.DisplayFor(modelItem => item.Product.Name)</td>
+                <td>@Html.DisplayFor(modelItem => item.UnitPrice)</td>
+                <td>@Html.DisplayFor(modelItem => item.Quantity)</td>
+                <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Discount)</td>
+                <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Supply.AspNetUser.FullName)</td>
+                <td class="hidden-xs">
+                    <img src="@(item.Product.Photo == "" ? "/Content/Images/Products/Default.jpg" : "/Content/Images/Products/" + item.Product.Photo)" class="image img-lg img-thumbnail" />
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Product.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.UnitPrice)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Quantity)</th>
+            <th>@Html.DisplayNameFor(model => model.Discount)</th>
+            <th class="hidden-xs">Employee Name</th>
+            <th class="hidden-xs">Product Image</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section styles
+{
+    <link href="~/Content/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/jszip.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/Scripts/Supply/Details.js"></script>
+}

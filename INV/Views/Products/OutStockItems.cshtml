@@ -1,0 +1,208 @@
+﻿@model IEnumerable<INV.Models.Product>
+
+@{
+    ViewBag.Title = "OutStockItems";
+}
+
+<div class="row">
+    <div class="col-xs-2 col-xs-offset-2">
+        <label for="min">Minimum Price</label>
+        <input type="number" class="form-control" id="min" placeholder="Minimum price" min="0">
+    </div>
+    <div class="col-xs-3"></div>
+    <div class="col-xs-2">
+        <label for="max">Maximum Price</label>
+        <input type="number" class="form-control" id="max" placeholder="Maximum price" min="0">
+    </div>
+</div>
+
+<table class="table table-bordered table-hover table-responsive" id="myTable">
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Photo)</th>
+            <th>@Html.DisplayNameFor(model => model.UnitsInStock)</th>
+            <th>@Html.DisplayNameFor(model => model.unitePrice)</th>
+            @*<th>@Html.DisplayNameFor(model => model.ExpireDate)</th>*@
+            @*<th>@Html.DisplayNameFor(model => model.EntryDate)</th>*@
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Notes)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Description)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Brand.Description)</th>*@
+            <th>@Html.DisplayNameFor(model => model.Supplier.Name)</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    @{ int i = 0; }
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr class="danger">
+                <td>@(++i)</td>
+                <td>@Html.DisplayFor(modelItem => item.Name)</td>
+                <td class="hidden-xs">
+                    <img src="@(item.Photo == "" ? "/Content/Images/Products/Default.jpg" : item.Photo)" width="50px" height="50px" class="image img-thumbnail" />
+                </td>
+                <td>@Html.DisplayFor(modelItem => item.UnitsInStock)</td>
+                <td>@Html.DisplayFor(modelItem => item.unitePrice)</td>
+                @*<td>@Html.DisplayFor(modelItem => item.ExpireDate)</td>*@
+                @*<td>@Html.DisplayFor(modelItem => item.EntryDate)</td>*@
+                <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Notes)</td>
+                <td class="hidden-xs">@Html.DisplayFor(modelItem => item.Description)</td>
+                @*<td>@Html.DisplayFor(modelItem => item.Brand.Description)</td>*@
+                <td>@Html.DisplayFor(modelItem => item.Supplier.Name)</td>
+                <td class="text-center">
+                    <div class="btn-group">
+                        <a href="@Url.Action("Edit", "Products", new {id = item.pro_id})" class="btn btn-flat bg-green">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="@Url.Action("Details", "Products", new {id = item.pro_id})" class="btn btn-flat bg-yellow">
+                            <i class="fa fa-eye"></i>
+                        </a>
+                        <a id="deleteBtn" onclick="deletefunc('@item.pro_id')" class="btn btn-flat bg-red">
+                            <i class="fa fa-remove"></i>
+                        </a>
+                        @*<a href="@Url.Action("Delete", "Products", new {id = item.pro_id})" class="btn btn-flat bg-red" id="btnDelete">
+                                <i class="fa fa-remove"></i>
+                            </a>*@
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>#</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Photo)</th>
+            <th>@Html.DisplayNameFor(model => model.UnitsInStock)</th>
+            <th>@Html.DisplayNameFor(model => model.unitePrice)</th>
+            @*<th>@Html.DisplayNameFor(model => model.ExpireDate)</th>*@
+            @*<th>@Html.DisplayNameFor(model => model.EntryDate)</th>*@
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Notes)</th>
+            <th class="hidden-xs">@Html.DisplayNameFor(model => model.Description)</th>
+            @*<th>@Html.DisplayNameFor(model => model.Brand.Description)</th>*@
+            <th>@Html.DisplayNameFor(model => model.Supplier.Name)</th>
+            <th>Action</th>
+        </tr>
+    </tfoot>
+</table>
+
+@section styles
+{
+    <link href="~/Content/plugins/datatables/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="~/Content/plugins/datatables/extensions/Buttons/css/buttons.dataTables.css" rel="stylesheet" />
+    <link href="~/Content/plugins/sweetAlert/sweetalert.css" rel="stylesheet" />
+}
+
+@section scripts
+{
+    <script src="~/Content/plugins/datatables/jquery.dataTables.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.flash.min.js"></script>
+    <script src="~/Content/plugins/datatables/jszip.min.js"></script>
+    <script src="~/Content/plugins/datatables/pdfmake.min.js"></script>
+    <script src="~/Content/plugins/datatables/vfs_fonts.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.html5.min.js"></script>
+    <script src="~/Content/plugins/datatables/extensions/Buttons/js/buttons.print.min.js"></script>
+    <script src="~/Content/plugins/sweetAlert/sweetalert.min.js"></script>
+    <script>
+        function deletefunc(id) {
+            swal({
+                    title: "Are you sure?",
+                    text: "Are you sure that you want to delete this Item?",
+                    type: "warning",
+                    showCancelButton: true,
+                    closeOnConfirm: false,
+                    confirmButtonText: "Yes, delete it!",
+                    confirmButtonColor: "#ec6c62"
+                },
+                function() {
+                    $.ajax({
+                            url: "/Products/Delete/" + id,
+                            type: "POST"
+                        })
+                        .done(function(data) {
+                            sweetAlert({
+                                    title: "Deleted!",
+                                    text: "Your file was successfully deleted!",
+                                    type: "success"
+                                },
+                                function() {
+                                    window.location.href = '/Products';
+                                });
+                        })
+                        .error(function(data) {
+                            swal("Oops", "We couldn't connect to the server!", "error");
+                        });
+                });
+        }
+    </script>
+
+    <script>
+        /* Custom filtering function which will search data in column four between two values */
+        $.fn.dataTable.ext.search.push(
+            function(settings, data, dataIndex) {
+                var min = parseInt($('#min').val(), 10);
+                var max = parseInt($('#max').val(), 10);
+                var Price = parseFloat(data[4]) || 0; // use data for the age column
+
+                if ((isNaN(min) && isNaN(max)) ||
+                    (isNaN(min) && Price <= max) ||
+                    (min <= Price && isNaN(max)) ||
+                    (min <= Price && Price <= max)) {
+                    return true;
+                }
+                return false;
+            }
+        );
+
+        $(document).ready(function() {
+            var table = $('#myTable').DataTable({
+                dom: 'Bfrtlp',
+                "paging": true,
+                "lengthChange": true,
+                "searching": true,
+                "ordering": true,
+                "info": true,
+                "autoWidth": false,
+                "aoColumnDefs":
+                [
+                    { "bSortable": false, "aTargets": [-1] } //a negative integer - column index counting from the right
+                ],
+                buttons: [
+                    'copy', 'csv', 'excel', 'pdf', 'print'
+                ]
+            });
+
+            // Event listener to the two range filtering inputs to redraw on input
+            $('#min, #max').keyup(function() {
+                table.draw();
+            });
+        });
+    </script>
+
+    @*<script>
+            $(document).ready(function() {
+                $('#myTable').DataTable({
+                    dom: 'Bfrtlp',
+                    "paging": true,
+                    "lengthChange": true,
+                    "searching": true,
+                    "ordering": true,
+                    "info": true,
+                    "autoWidth": false,
+                    "aoColumnDefs":
+                    [
+                        { "bSortable": false, "aTargets": [-1] } //a negative integer - column index counting from the right
+                    ],
+                    buttons: [
+                        'copy', 'csv', 'excel', 'pdf', 'print'
+                    ]
+                });
+            });
+        </script>*@
+
+
+
+}

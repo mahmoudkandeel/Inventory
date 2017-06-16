@@ -1,0 +1,1153 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="InventoryModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="AspNetUsers">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="Salary" Type="int" Nullable="false" />
+          <Property Name="Address" Type="nvarchar(max)" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="About" Type="nvarchar(max)" />
+          <Property Name="HireDate" Type="datetime" />
+          <Property Name="FullName" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="EmailConfirmed" Type="bit" Nullable="false" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="PhoneNumber" Type="nvarchar(max)" />
+          <Property Name="PhoneNumberConfirmed" Type="bit" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="bit" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="datetime" />
+          <Property Name="LockoutEnabled" Type="bit" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="int" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="256" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Brands">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cat_id" Type="int" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Categories">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Description" Type="nvarchar" MaxLength="150" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="CustomerProducts">
+          <Key>
+            <PropertyRef Name="cust_Id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="cust_Id" Type="int" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Customers">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="int" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Zipcode" Type="nvarchar" MaxLength="150" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Balance" Type="int" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="OrderDetails">
+          <Key>
+            <PropertyRef Name="ord_id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="ord_id" Type="int" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Orders">
+          <Key>
+            <PropertyRef Name="ord_id" />
+          </Key>
+          <Property Name="ord_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="cust_id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="orderNo" Type="nchar" MaxLength="30" />
+          <Property Name="DateTime" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Products">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="brand_id" Type="int" Nullable="false" />
+          <Property Name="sup_id" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="UnitsInStock" Type="int" />
+          <Property Name="unitePrice" Type="int" />
+          <Property Name="ExpireDate" Type="date" />
+          <Property Name="EntryDate" Type="date" />
+          <Property Name="Notes" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SupplierInvoices">
+          <Key>
+            <PropertyRef Name="Sinv_id" />
+          </Key>
+          <Property Name="Sinv_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sup_id" Type="int" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="DateTime" Type="date" />
+          <Property Name="UnitPrice" Type="int" />
+          <Property Name="Quantity" Type="nvarchar" MaxLength="50" />
+          <Property Name="Discount" Type="int" />
+        </EntityType>
+        <EntityType Name="SupplierProducts">
+          <Key>
+            <PropertyRef Name="sup_id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="sup_id" Type="int" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Suppliers">
+          <Key>
+            <PropertyRef Name="sup_id" />
+          </Key>
+          <Property Name="sup_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" />
+          <Property Name="Address" Type="nvarchar" MaxLength="150" />
+          <Property Name="Phone" Type="nvarchar" MaxLength="150" />
+          <Property Name="Photo" Type="nvarchar(max)" />
+          <Property Name="Zipcode" Type="int" />
+          <Property Name="Email" Type="nvarchar" MaxLength="150" />
+          <Property Name="Notes" Type="nvarchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="supply_id" />
+          </Key>
+          <Property Name="supply_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="sup_id" Type="int" Nullable="false" />
+          <Property Name="emp_id" Type="nvarchar" MaxLength="128" />
+          <Property Name="SupplyNo" Type="nchar" MaxLength="30" />
+          <Property Name="DateTime" Type="date" />
+          <Property Name="Description" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="SupplyDetails">
+          <Key>
+            <PropertyRef Name="supply_id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="supply_id" Type="int" Nullable="false" />
+          <Property Name="pro_id" Type="int" Nullable="false" />
+          <Property Name="UnitPrice" Type="int" Nullable="false" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
+          <Property Name="Discount" Type="int" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Brand_Categorie">
+          <End Role="Categories" Type="Self.Categories" Multiplicity="0..1" />
+          <End Role="Brands" Type="Self.Brands" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="Brands">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerProduct_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="CustomerProducts" Type="Self.CustomerProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="cust_id" />
+            </Principal>
+            <Dependent Role="CustomerProducts">
+              <PropertyRef Name="cust_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CustomerProduct_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="CustomerProducts" Type="Self.CustomerProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="CustomerProducts">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Orders" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ord_id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ord_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customers">
+          <End Role="Customers" Type="Self.Customers" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Orders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="cust_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="cust_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Self.Brands" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="brand_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Products" Type="Self.Products" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierInvoce_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="SupplierInvoices" Type="Self.SupplierInvoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="SupplierInvoices">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliersInvoce_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SupplierInvoices" Type="Self.SupplierInvoices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="SupplierInvoices">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliersProducts_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SupplierProducts" Type="Self.SupplierProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="SupplierProducts">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliersProducts_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="SupplierProducts" Type="Self.SupplierProducts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="SupplierProducts">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUsers" Multiplicity="0..1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Suppliers">
+          <End Role="Suppliers" Type="Self.Suppliers" Multiplicity="1" />
+          <End Role="Supply" Type="Self.Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyDetails_Products">
+          <End Role="Products" Type="Self.Products" Multiplicity="1" />
+          <End Role="SupplyDetails" Type="Self.SupplyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="SupplyDetails">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyDetails_Supply">
+          <End Role="Supply" Type="Self.Supply" Multiplicity="1" />
+          <End Role="SupplyDetails" Type="Self.SupplyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="supply_id" />
+            </Principal>
+            <Dependent Role="SupplyDetails">
+              <PropertyRef Name="supply_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="BrandWorth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="BrandId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="CategoryWorth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CatId" Type="int" Mode="In" />
+        </Function>
+        <Function Name="LowStock" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="maxBrandsales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="maxsales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="minBrandsales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="minsales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumBrand" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumCat" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumEmp" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumOr" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumPro" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="NumSup" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="StockWorth" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="InventoryModelStoreContainer">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUsers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Categories" EntityType="Self.Categories" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerProducts" EntityType="Self.CustomerProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Orders" EntityType="Self.Orders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierInvoices" EntityType="Self.SupplierInvoices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplierProducts" EntityType="Self.SupplierProducts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Supply" EntityType="Self.Supply" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="SupplyDetails" EntityType="Self.SupplyDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Brand_Categorie" Association="Self.FK_Brand_Categorie">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Brands" EntitySet="Brands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerProduct_Customers" Association="Self.FK_CustomerProduct_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CustomerProduct_Products" Association="Self.FK_CustomerProduct_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="CustomerProducts" EntitySet="CustomerProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Self.FK_Orders_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierInvoce_Suppliers" Association="Self.FK_SupplierInvoce_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SupplierInvoices" EntitySet="SupplierInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliersInvoce_Products" Association="Self.FK_SuppliersInvoce_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SupplierInvoices" EntitySet="SupplierInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliersProducts_Products" Association="Self.FK_SuppliersProducts_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SupplierProducts" EntitySet="SupplierProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliersProducts_Suppliers" Association="Self.FK_SuppliersProducts_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SupplierProducts" EntitySet="SupplierProducts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_AspNetUsers" Association="Self.FK_Supply_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Supply" EntitySet="Supply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Suppliers" Association="Self.FK_Supply_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Supply" EntitySet="Supply" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDetails_Products" Association="Self.FK_SupplyDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SupplyDetails" EntitySet="SupplyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDetails_Supply" Association="Self.FK_SupplyDetails_Supply">
+            <End Role="Supply" EntitySet="Supply" />
+            <End Role="SupplyDetails" EntitySet="SupplyDetails" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="InventoryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="AspNetUser">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Salary" Type="Int32" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="About" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="HireDate" Type="DateTime" Precision="3" />
+          <Property Name="FullName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PhoneNumberConfirmed" Type="Boolean" Nullable="false" />
+          <Property Name="TwoFactorEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="LockoutEndDateUtc" Type="DateTime" Precision="3" />
+          <Property Name="LockoutEnabled" Type="Boolean" Nullable="false" />
+          <Property Name="AccessFailedCount" Type="Int32" Nullable="false" />
+          <Property Name="UserName" Type="String" MaxLength="256" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_AspNetUsers" FromRole="AspNetUsers" ToRole="Orders" />
+          <NavigationProperty Name="Supplies" Relationship="InventoryModel.FK_Supply_AspNetUsers" FromRole="AspNetUser" ToRole="Supply" />
+        </EntityType>
+        <EntityType Name="Brand">
+          <Key>
+            <PropertyRef Name="brand_id" />
+          </Key>
+          <Property Name="brand_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="cat_id" Type="Int32" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Category" Relationship="Self.FK_Brand_Categorie" FromRole="Brands" ToRole="Categories" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Brands" FromRole="Brands" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Category">
+          <Key>
+            <PropertyRef Name="cat_id" />
+          </Key>
+          <Property Name="cat_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Brands" Relationship="Self.FK_Brand_Categorie" FromRole="Categories" ToRole="Brands" />
+        </EntityType>
+        <EntityType Name="Customer">
+          <Key>
+            <PropertyRef Name="cust_id" />
+          </Key>
+          <Property Name="cust_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="Int32" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="Int32" />
+          <Property Name="Notes" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Orders" Relationship="Self.FK_Orders_Customers" FromRole="Customers" ToRole="Orders" />
+          <NavigationProperty Name="Products" Relationship="Self.CustomerProducts" FromRole="Customers" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="OrderDetail">
+          <Key>
+            <PropertyRef Name="ord_id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="ord_id" Type="Int32" Nullable="false" />
+          <Property Name="pro_id" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Order" Relationship="Self.FK_OrderDetails_Orders" FromRole="OrderDetails" ToRole="Orders" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_OrderDetails_Products" FromRole="OrderDetails" ToRole="Products" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="ord_id" />
+          </Key>
+          <Property Name="ord_id" Type="Int32" Nullable="false" />
+          <Property Name="cust_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="Self.FK_Orders_AspNetUsers" FromRole="Orders" ToRole="AspNetUsers" />
+          <NavigationProperty Name="Customer" Relationship="Self.FK_Orders_Customers" FromRole="Orders" ToRole="Customers" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Orders" FromRole="Orders" ToRole="OrderDetails" />
+          <Property Name="orderNo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Product">
+          <Key>
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="pro_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="brand_id" Type="Int32" Nullable="false" />
+          <Property Name="sup_id" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UnitsInStock" Type="Int32" />
+          <Property Name="unitePrice" Type="Int32" />
+          <Property Name="ExpireDate" Type="DateTime" Precision="0" />
+          <Property Name="EntryDate" Type="DateTime" Precision="0" />
+          <Property Name="Notes" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Brand" Relationship="Self.FK_Products_Brands" FromRole="Products" ToRole="Brands" />
+          <NavigationProperty Name="OrderDetails" Relationship="Self.FK_OrderDetails_Products" FromRole="Products" ToRole="OrderDetails" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_Products_Suppliers" FromRole="Products" ToRole="Suppliers" />
+          <NavigationProperty Name="SupplierInvoices" Relationship="Self.FK_SuppliersInvoce_Products" FromRole="Products" ToRole="SupplierInvoices" />
+          <NavigationProperty Name="Customers" Relationship="Self.CustomerProducts" FromRole="Products" ToRole="Customers" />
+          <NavigationProperty Name="Suppliers" Relationship="Self.SupplierProducts" FromRole="Products" ToRole="Suppliers" />
+          <NavigationProperty Name="SupplyDetails" Relationship="InventoryModel.FK_SupplyDetails_Products" FromRole="Product" ToRole="SupplyDetail" />
+        </EntityType>
+        <EntityType Name="SupplierInvoice">
+          <Key>
+            <PropertyRef Name="Sinv_id" />
+          </Key>
+          <Property Name="Sinv_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="sup_id" Type="Int32" Nullable="false" />
+          <Property Name="pro_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DateTime" Type="DateTime" Precision="0" />
+          <Property Name="UnitPrice" Type="Int32" />
+          <Property Name="Quantity" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Discount" Type="Int32" />
+          <NavigationProperty Name="Product" Relationship="Self.FK_SuppliersInvoce_Products" FromRole="SupplierInvoices" ToRole="Products" />
+          <NavigationProperty Name="Supplier" Relationship="Self.FK_SupplierInvoce_Suppliers" FromRole="SupplierInvoices" ToRole="Suppliers" />
+        </EntityType>
+        <EntityType Name="Supplier">
+          <Key>
+            <PropertyRef Name="sup_id" />
+          </Key>
+          <Property Name="sup_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Name" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Address" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Phone" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Photo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Zipcode" Type="Int32" />
+          <Property Name="Email" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="Notes" Type="String" MaxLength="150" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Products" Relationship="Self.FK_Products_Suppliers" FromRole="Suppliers" ToRole="Products" />
+          <NavigationProperty Name="SupplierInvoices" Relationship="Self.FK_SupplierInvoce_Suppliers" FromRole="Suppliers" ToRole="SupplierInvoices" />
+          <NavigationProperty Name="Products1" Relationship="Self.SupplierProducts" FromRole="Suppliers" ToRole="Products" />
+          <NavigationProperty Name="Supplies" Relationship="InventoryModel.FK_Supply_Suppliers" FromRole="Supplier" ToRole="Supply" />
+        </EntityType>
+        <Association Name="FK_Orders_AspNetUsers">
+          <End Role="AspNetUsers" Type="Self.AspNetUser" Multiplicity="0..1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUsers">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Brand_Categorie">
+          <End Role="Categories" Type="Self.Category" Multiplicity="0..1" />
+          <End Role="Brands" Type="Self.Brand" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Categories">
+              <PropertyRef Name="cat_id" />
+            </Principal>
+            <Dependent Role="Brands">
+              <PropertyRef Name="cat_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Brands">
+          <End Role="Brands" Type="Self.Brand" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Brands">
+              <PropertyRef Name="brand_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="brand_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Orders_Customers">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="1" />
+          <End Role="Orders" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Customers">
+              <PropertyRef Name="cust_id" />
+            </Principal>
+            <Dependent Role="Orders">
+              <PropertyRef Name="cust_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Orders">
+          <End Role="Orders" Type="Self.Order" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Orders">
+              <PropertyRef Name="ord_id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="ord_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderDetails_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="OrderDetails" Type="Self.OrderDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="OrderDetails">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Products_Suppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="Products">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SuppliersInvoce_Products">
+          <End Role="Products" Type="Self.Product" Multiplicity="1" />
+          <End Role="SupplierInvoices" Type="Self.SupplierInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Products">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="SupplierInvoices">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplierInvoce_Suppliers">
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="1" />
+          <End Role="SupplierInvoices" Type="Self.SupplierInvoice" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Suppliers">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="SupplierInvoices">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CustomerProducts">
+          <End Role="Customers" Type="Self.Customer" Multiplicity="*" />
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+        </Association>
+        <Association Name="SupplierProducts">
+          <End Role="Products" Type="Self.Product" Multiplicity="*" />
+          <End Role="Suppliers" Type="Self.Supplier" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="InventoryEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="AspNetUsers" EntityType="Self.AspNetUser" />
+          <EntitySet Name="Brands" EntityType="Self.Brand" />
+          <EntitySet Name="Categories" EntityType="Self.Category" />
+          <EntitySet Name="Customers" EntityType="Self.Customer" />
+          <EntitySet Name="OrderDetails" EntityType="Self.OrderDetail" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="Products" EntityType="Self.Product" />
+          <EntitySet Name="SupplierInvoices" EntityType="Self.SupplierInvoice" />
+          <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+          <AssociationSet Name="FK_Orders_AspNetUsers" Association="Self.FK_Orders_AspNetUsers">
+            <End Role="AspNetUsers" EntitySet="AspNetUsers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Brand_Categorie" Association="Self.FK_Brand_Categorie">
+            <End Role="Categories" EntitySet="Categories" />
+            <End Role="Brands" EntitySet="Brands" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Brands" Association="Self.FK_Products_Brands">
+            <End Role="Brands" EntitySet="Brands" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Orders_Customers" Association="Self.FK_Orders_Customers">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Orders" EntitySet="Orders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Orders" Association="Self.FK_OrderDetails_Orders">
+            <End Role="Orders" EntitySet="Orders" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderDetails_Products" Association="Self.FK_OrderDetails_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="OrderDetails" EntitySet="OrderDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Products_Suppliers" Association="Self.FK_Products_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SuppliersInvoce_Products" Association="Self.FK_SuppliersInvoce_Products">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="SupplierInvoices" EntitySet="SupplierInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplierInvoce_Suppliers" Association="Self.FK_SupplierInvoce_Suppliers">
+            <End Role="Suppliers" EntitySet="Suppliers" />
+            <End Role="SupplierInvoices" EntitySet="SupplierInvoices" />
+          </AssociationSet>
+          <AssociationSet Name="CustomerProducts" Association="Self.CustomerProducts">
+            <End Role="Customers" EntitySet="Customers" />
+            <End Role="Products" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="SupplierProducts" Association="Self.SupplierProducts">
+            <End Role="Products" EntitySet="Products" />
+            <End Role="Suppliers" EntitySet="Suppliers" />
+          </AssociationSet>
+          <EntitySet Name="Supplies" EntityType="InventoryModel.Supply" />
+          <EntitySet Name="SupplyDetails" EntityType="InventoryModel.SupplyDetail" />
+          <AssociationSet Name="FK_Supply_AspNetUsers" Association="InventoryModel.FK_Supply_AspNetUsers">
+            <End Role="AspNetUser" EntitySet="AspNetUsers" />
+            <End Role="Supply" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDetails_Products" Association="InventoryModel.FK_SupplyDetails_Products">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="SupplyDetail" EntitySet="SupplyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Supply_Suppliers" Association="InventoryModel.FK_Supply_Suppliers">
+            <End Role="Supplier" EntitySet="Suppliers" />
+            <End Role="Supply" EntitySet="Supplies" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SupplyDetails_Supply" Association="InventoryModel.FK_SupplyDetails_Supply">
+            <End Role="Supply" EntitySet="Supplies" />
+            <End Role="SupplyDetail" EntitySet="SupplyDetails" />
+          </AssociationSet>
+          <FunctionImport Name="BrandWorth" ReturnType="Collection(Int32)">
+            <Parameter Name="BrandId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="CategoryWorth" ReturnType="Collection(Int32)">
+            <Parameter Name="CatId" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="LowStock" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="maxBrandsales" ReturnType="Collection(InventoryModel.maxBrandsales_Result)" />
+          <FunctionImport Name="maxsales" ReturnType="Collection(InventoryModel.maxsales_Result)" />
+          <FunctionImport Name="minBrandsales" ReturnType="Collection(InventoryModel.minBrandsales_Result)" />
+          <FunctionImport Name="minsales" ReturnType="Collection(InventoryModel.minsales_Result)" />
+          <FunctionImport Name="NumBrand" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="NumCat" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="NumEmp" />
+          <FunctionImport Name="NumOr" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="NumPro" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="NumSup" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="StockWorth" ReturnType="Collection(Int32)" />
+        </EntityContainer>
+        <EntityType Name="Supply">
+          <Key>
+            <PropertyRef Name="supply_id" />
+          </Key>
+          <Property Name="supply_id" Type="Int32" Nullable="false" />
+          <Property Name="sup_id" Type="Int32" Nullable="false" />
+          <Property Name="emp_id" Type="String" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="SupplyNo" Type="String" MaxLength="30" FixedLength="true" Unicode="true" />
+          <Property Name="DateTime" Type="DateTime" Precision="0" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="AspNetUser" Relationship="InventoryModel.FK_Supply_AspNetUsers" FromRole="Supply" ToRole="AspNetUser" />
+          <NavigationProperty Name="Supplier" Relationship="InventoryModel.FK_Supply_Suppliers" FromRole="Supply" ToRole="Supplier" />
+          <NavigationProperty Name="SupplyDetails" Relationship="InventoryModel.FK_SupplyDetails_Supply" FromRole="Supply" ToRole="SupplyDetail" />
+        </EntityType>
+        <EntityType Name="SupplyDetail">
+          <Key>
+            <PropertyRef Name="supply_id" />
+            <PropertyRef Name="pro_id" />
+          </Key>
+          <Property Name="supply_id" Type="Int32" Nullable="false" />
+          <Property Name="pro_id" Type="Int32" Nullable="false" />
+          <Property Name="UnitPrice" Type="Int32" Nullable="false" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
+          <Property Name="Discount" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Product" Relationship="InventoryModel.FK_SupplyDetails_Products" FromRole="SupplyDetail" ToRole="Product" />
+          <NavigationProperty Name="Supply" Relationship="InventoryModel.FK_SupplyDetails_Supply" FromRole="SupplyDetail" ToRole="Supply" />
+        </EntityType>
+        <Association Name="FK_Supply_AspNetUsers">
+          <End Type="InventoryModel.AspNetUser" Role="AspNetUser" Multiplicity="0..1" />
+          <End Type="InventoryModel.Supply" Role="Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="AspNetUser">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="emp_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyDetails_Products">
+          <End Type="InventoryModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="InventoryModel.SupplyDetail" Role="SupplyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="pro_id" />
+            </Principal>
+            <Dependent Role="SupplyDetail">
+              <PropertyRef Name="pro_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Supply_Suppliers">
+          <End Type="InventoryModel.Supplier" Role="Supplier" Multiplicity="1" />
+          <End Type="InventoryModel.Supply" Role="Supply" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supplier">
+              <PropertyRef Name="sup_id" />
+            </Principal>
+            <Dependent Role="Supply">
+              <PropertyRef Name="sup_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SupplyDetails_Supply">
+          <End Type="InventoryModel.Supply" Role="Supply" Multiplicity="1" />
+          <End Type="InventoryModel.SupplyDetail" Role="SupplyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Supply">
+              <PropertyRef Name="supply_id" />
+            </Principal>
+            <Dependent Role="SupplyDetail">
+              <PropertyRef Name="supply_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="maxBrandsales_Result">
+          <Property Type="Int32" Name="MaxSailedBrands" Nullable="true" />
+          <Property Type="String" Name="BrandName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="maxsales_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="minBrandsales_Result">
+          <Property Type="Int32" Name="MinSailedBrands" Nullable="true" />
+          <Property Type="String" Name="BrandName" Nullable="true" MaxLength="150" />
+        </ComplexType>
+        <ComplexType Name="minsales_Result">
+          <Property Type="Int32" Name="Column1" Nullable="true" />
+          <Property Type="String" Name="Name" Nullable="true" MaxLength="150" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="InventoryModelStoreContainer" CdmEntityContainer="InventoryEntities">
+          <EntitySetMapping Name="AspNetUsers">
+            <EntityTypeMapping TypeName="InventoryModel.AspNetUser">
+              <MappingFragment StoreEntitySet="AspNetUsers">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="Salary" ColumnName="Salary" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="About" ColumnName="About" />
+                <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="PhoneNumberConfirmed" ColumnName="PhoneNumberConfirmed" />
+                <ScalarProperty Name="TwoFactorEnabled" ColumnName="TwoFactorEnabled" />
+                <ScalarProperty Name="LockoutEndDateUtc" ColumnName="LockoutEndDateUtc" />
+                <ScalarProperty Name="LockoutEnabled" ColumnName="LockoutEnabled" />
+                <ScalarProperty Name="AccessFailedCount" ColumnName="AccessFailedCount" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Brands">
+            <EntityTypeMapping TypeName="InventoryModel.Brand">
+              <MappingFragment StoreEntitySet="Brands">
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Categories">
+            <EntityTypeMapping TypeName="InventoryModel.Category">
+              <MappingFragment StoreEntitySet="Categories">
+                <ScalarProperty Name="cat_id" ColumnName="cat_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Customers">
+            <EntityTypeMapping TypeName="InventoryModel.Customer">
+              <MappingFragment StoreEntitySet="Customers">
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderDetails">
+            <EntityTypeMapping TypeName="InventoryModel.OrderDetail">
+              <MappingFragment StoreEntitySet="OrderDetails">
+                <ScalarProperty Name="ord_id" ColumnName="ord_id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="InventoryModel.Order">
+              <MappingFragment StoreEntitySet="Orders">
+                <ScalarProperty Name="orderNo" ColumnName="orderNo" />
+                <ScalarProperty Name="ord_id" ColumnName="ord_id" />
+                <ScalarProperty Name="cust_id" ColumnName="cust_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Products">
+            <EntityTypeMapping TypeName="InventoryModel.Product">
+              <MappingFragment StoreEntitySet="Products">
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="brand_id" ColumnName="brand_id" />
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="UnitsInStock" ColumnName="UnitsInStock" />
+                <ScalarProperty Name="unitePrice" ColumnName="unitePrice" />
+                <ScalarProperty Name="ExpireDate" ColumnName="ExpireDate" />
+                <ScalarProperty Name="EntryDate" ColumnName="EntryDate" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplierInvoices">
+            <EntityTypeMapping TypeName="InventoryModel.SupplierInvoice">
+              <MappingFragment StoreEntitySet="SupplierInvoices">
+                <ScalarProperty Name="Sinv_id" ColumnName="Sinv_id" />
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Suppliers">
+            <EntityTypeMapping TypeName="InventoryModel.Supplier">
+              <MappingFragment StoreEntitySet="Suppliers">
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="Phone" ColumnName="Phone" />
+                <ScalarProperty Name="Photo" ColumnName="Photo" />
+                <ScalarProperty Name="Zipcode" ColumnName="Zipcode" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Notes" ColumnName="Notes" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CustomerProducts" TypeName="InventoryModel.CustomerProducts" StoreEntitySet="CustomerProducts">
+            <EndProperty Name="Customers">
+              <ScalarProperty Name="cust_id" ColumnName="cust_Id" />
+            </EndProperty>
+            <EndProperty Name="Products">
+              <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="SupplierProducts" TypeName="InventoryModel.SupplierProducts" StoreEntitySet="SupplierProducts">
+            <EndProperty Name="Products">
+              <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+            </EndProperty>
+            <EndProperty Name="Suppliers">
+              <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Supplies">
+            <EntityTypeMapping TypeName="InventoryModel.Supply">
+              <MappingFragment StoreEntitySet="Supply">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="DateTime" ColumnName="DateTime" />
+                <ScalarProperty Name="SupplyNo" ColumnName="SupplyNo" />
+                <ScalarProperty Name="emp_id" ColumnName="emp_id" />
+                <ScalarProperty Name="sup_id" ColumnName="sup_id" />
+                <ScalarProperty Name="supply_id" ColumnName="supply_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="SupplyDetails">
+            <EntityTypeMapping TypeName="InventoryModel.SupplyDetail">
+              <MappingFragment StoreEntitySet="SupplyDetails">
+                <ScalarProperty Name="Discount" ColumnName="Discount" />
+                <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+                <ScalarProperty Name="pro_id" ColumnName="pro_id" />
+                <ScalarProperty Name="supply_id" ColumnName="supply_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="BrandWorth" FunctionName="InventoryModel.Store.BrandWorth" />
+          <FunctionImportMapping FunctionImportName="CategoryWorth" FunctionName="InventoryModel.Store.CategoryWorth" />
+          <FunctionImportMapping FunctionImportName="LowStock" FunctionName="InventoryModel.Store.LowStock" />
+          <FunctionImportMapping FunctionImportName="maxBrandsales" FunctionName="InventoryModel.Store.maxBrandsales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.maxBrandsales_Result">
+                <ScalarProperty Name="MaxSailedBrands" ColumnName="MaxSailedBrands" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="maxsales" FunctionName="InventoryModel.Store.maxsales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.maxsales_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="minBrandsales" FunctionName="InventoryModel.Store.minBrandsales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.minBrandsales_Result">
+                <ScalarProperty Name="MinSailedBrands" ColumnName="MinSailedBrands" />
+                <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="minsales" FunctionName="InventoryModel.Store.minsales">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="InventoryModel.minsales_Result">
+                <ScalarProperty Name="Column1" ColumnName="Column1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="NumBrand" FunctionName="InventoryModel.Store.NumBrand" />
+          <FunctionImportMapping FunctionImportName="NumCat" FunctionName="InventoryModel.Store.NumCat" />
+          <FunctionImportMapping FunctionImportName="NumEmp" FunctionName="InventoryModel.Store.NumEmp" />
+          <FunctionImportMapping FunctionImportName="NumOr" FunctionName="InventoryModel.Store.NumOr" />
+          <FunctionImportMapping FunctionImportName="NumPro" FunctionName="InventoryModel.Store.NumPro" />
+          <FunctionImportMapping FunctionImportName="NumSup" FunctionName="InventoryModel.Store.NumSup" />
+          <FunctionImportMapping FunctionImportName="StockWorth" FunctionName="InventoryModel.Store.StockWorth" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

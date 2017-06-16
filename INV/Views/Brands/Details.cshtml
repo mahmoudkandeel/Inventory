@@ -1,0 +1,29 @@
+﻿@model INV.Models.Brand
+
+@{
+    ViewBag.Title = "Details";
+}
+<div class="box box-warning">
+    <div class="box-header with-border">
+        <h3 class="box-title">Brand Details</h3>
+    </div>
+    <!-- /.box-header -->
+    <div class="box-body">
+        <div class="form-group">
+            <label>Brand Name</label>
+            <input type="text" class="form-control" placeholder="@Model.Name" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Brand Description</label>
+            <input type="text" class="form-control" placeholder="@Model.Description" disabled="">
+        </div>
+        <div class="form-group">
+            <label>Brand Category</label>
+            <input type="text" class="form-control" placeholder="@Model.Category.Name" disabled="">
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { id = Model.cat_id }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+    </div>
+</div>

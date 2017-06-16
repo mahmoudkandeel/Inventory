@@ -1,0 +1,36 @@
+﻿@model INV.Models.Order
+
+@{
+    ViewBag.Title = "New";
+}
+
+
+<a href="#" class="btn btn-primary" data-toggle="modal" data-target="#myModal">Add Product</a>
+
+
+
+@*<h2>New</h2>
+
+@using (Ajax.BeginForm("New","OrderDetails", new AjaxOptions
+{
+    HttpMethod = "POST",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "OrderDetails",
+    OnFailure = "AddOrderError"
+}))
+{
+    <input type="submit" value="Add Product"/>
+}
+
+
+<div id="OrderDetails"></div>
+
+@section Scripts
+{
+    <script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function AddOrderError() {
+            $("#OrderDetails").html = "An Error has been occured";
+        }
+    </script>
+}*@
